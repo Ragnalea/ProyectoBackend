@@ -1,0 +1,20 @@
+{
+  "name": "backendproyecto",
+  "version": "1.0.0",
+  "main": "Index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ragnalea/ProyectoBackend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ragnalea/ProyectoBackend/issues"
+  },
+  "homepage": "https://github.com/Ragnalea/ProyectoBackend#readme",
+  "description": ""
+}
