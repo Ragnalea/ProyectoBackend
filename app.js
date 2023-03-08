@@ -13,7 +13,12 @@ app.get('/', async (req,res)=>{
 
 app.get('/products', async (req,res)=>{
     const products = await productManager.getProduct()
-    res.json({products})
+    const {limite} = req.query
+    if (limite > 0){
+        res.json(products.slice(0,limite))
+    }else{
+        res.json({products})
+    }
 })
 
 app.get('/products/:idProd',async(req,res)=>{

@@ -33,5 +33,33 @@
     "description": "Juego de PS4",
     "price": 10200,
     "stock": 15
+  },
+  {
+    "id": 6,
+    "title": "Devil May Cry 5",
+    "description": "Juego de PS4",
+    "price": 10200,
+    "stock": 15
+  },
+  {
+    "id": 7,
+    "title": "Rocket League",
+    "description": "Juego de PC",
+    "price": 10200,
+    "stock": 15
+  },
+  {
+    "id": 8,
+    "title": "Assassin's Creed II",
+    "description": "Juego de Xbox",
+    "price": 10200,
+    "stock": 15
+  },
+  {
+    "id": 9,
+    "title": "Final Fantasy X",
+    "description": "Juego de Nintendo",
+    "price": 10200,
+    "stock": 15
   }
 ]
