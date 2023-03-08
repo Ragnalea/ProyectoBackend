@@ -1,22 +1,20 @@
-const fs = require('fs');
-const path = 'Productos.json'
-
-class ProductManager{
+import fs from 'fs'
+export default class ProductManager{
     constructor(path){
         this.path = path
     }
 
-    ConsultProduct= async () => {
+
+    async getProduct (){
         if (fs.existsSync(this.path)){
-            const infoOfArchive = await fs.promises.readFile(this.path)
-            const product = JSON.parse(infoOfArchive)
-            return product
+            const infoOfArchive = await fs.promises.readFile(this.path, 'utf-8')
+            return JSON.parse(infoOfArchive)
         }
         return []
     }
 
-    CreateProduct = async (product) => {
-        const products = await this.ConsultProduct()
+    async CreateProduct (product) {
+        const products = await this.getProduct()
         let id 
             if (products.length === 0){
                 id = 1
@@ -29,63 +27,42 @@ class ProductManager{
         return newProduct
     }
 
-    getProductById = async (productId) => {
-        const products = await this.ConsultProduct()
-        const productFilter = products.find( el => el.id == productId)
-        if (productFilter == undefined)
-            return console.log("Not Found, Sorry :(")
-        return productFilter
+    async getProductById(productId){
+        const products = await this.getProduct()
+        const productFilter = products.find( x => x.id == productId)
+        if (productFilter)
+            return productFilter
+        return console.log("Not Found, Sorry :(")
     }
 
-    UpdateProductById = async (productId,list) =>{
+    async UpdateProductById (productId,list){
         const products = await this.ConsultProduct()
-        const positionProduct = products.findIndex(x => x.id === productId)
-        if (positionProduct === -1) {
-            return console.log('El Producto no existe')
-        }
-        const userUpdated = {...products[positionProduct], ...list}
-        products.splice(positionProduct,1,userUpdated)
+        const findProduct = products.find(x => x.id === productId)
+        if (!findProduct)
+            return console.log('Error 404, Not Found')
+        const updateProduct ={...product,...obj}
+        const productIndex = products.findIndex( (x) => x.id === productId)
+        products.splice(productIndex,1,updateProduct)
         await fs.promises.writeFile(this.path,JSON.stringify(products))
-        return products
+        return 'Product update'
     }
 
-    deleteProductById = async (productId) => {
-        const products = await this.ConsultProduct()
-        const productFilter = products.filter( (el) => el.id !== productId)
-        await fs.promises.writeFile(this.path, JSON.stringify(productFilter))
-        return productFilter        
+    async deleteProducts(){
+        if (fs.existsSync(this.path)){
+            await fs.promises.unlink(this.path)
+            return 'Products Deleted'
+        }
+        return 'The list products is void'
+        }
+
+    async deleteProductById(productId){
+        const products = await this.getProduct()
+        const productFilter = products.findIndex( (x) => x.id !== productId)
+        products.splice(productFilter,1)
+        if(productFilter === -1 )
+            return 'Product is not found'
+        products.splice(productFilter,1)
+        await fs.promises.writeFile(this.path,JSON.stringify(products))
+        return 'products deleted'
     }
 }
-const product1 = {
-    code: Math.floor(1 + Math.random()*(10000 - 1 + 1)),
-    title: "Devil May Cry 5",
-    description: "Juego de PS4",
-    price:10200,
-    stock:15,
-    thumbnail: "https://media.vandal.net/m/54971/devil-may-cry-5-201912413174736_1.jpg"
-}
-
-const product2 = {
-    code: Math.floor(1 + Math.random()*(10000 - 1 + 1)),
-    title: "Drakengard 3",
-    description: "Juego de PS3",
-    price:2500,
-    stock:10,
-    thumbnail: "https://media.vandal.net/i/ivandal/1200x630/20654/drakengard-3-2014520125032_1.jpg"
-}
-
-async function FuctionManager(){
-    const manager = new ProductManager(path)
-    //await manager.CreateProduct(product1)
-    //await manager.CreateProduct(product2)
-    //const productos = await manager.ConsultProduct()
-    //console.log(productos)
-    //const productById = await manager.getProductById(1)
-    //console.log(productById)
-    //const updateProductById = await manager.UpdateProductById(2,{title: "Destiny 1"} )
-    //console.log(updateProductById)
-    const deleteProductById = await manager.deleteProductById(1)
-    //console.log(deleteProductById)
-}
-
-FuctionManager()

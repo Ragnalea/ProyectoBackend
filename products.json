@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "Devil May Cry 5",
+    "description": "Juego de PS4",
+    "price": 10200,
+    "stock": 15
+  },
+  {
+    "id": 2,
+    "title": "Devil May Cry 5",
+    "description": "Juego de PS4",
+    "price": 10200,
+    "stock": 15
+  },
+  {
+    "id": 3,
+    "title": "Devil May Cry 5",
+    "description": "Juego de PS4",
+    "price": 10200,
+    "stock": 15
+  },
+  {
+    "id": 4,
+    "title": "Devil May Cry 5",
+    "description": "Juego de PS4",
+    "price": 10200,
+    "stock": 15
+  },
+  {
+    "id": 5,
+    "title": "Devil May Cry 5",
+    "description": "Juego de PS4",
+    "price": 10200,
+    "stock": 15
+  }
+]
